@@ -89,8 +89,8 @@ export class Tree {
   }
 
   levelOrder(callback) {
-    if(!this.root) {
-        return;
+    if (!this.root) {
+      return;
     }
 
     const queue = [];
@@ -98,7 +98,7 @@ export class Tree {
 
     while (queue.length > 0) {
       const node = queue.shift();
-      
+
       callback(node);
 
       if (node.leftChild !== null) {
@@ -108,5 +108,52 @@ export class Tree {
         queue.push(node.rightChild);
       }
     }
+  }
+
+  inorder(callback) {
+    const result = [];
+
+    function traverse(node) {
+      if (node) {
+        traverse(node.leftChild);
+        result.push(node.data);
+        callback(node);
+        traverse(node.rightChild);
+      }
+    }
+
+    traverse(this.root);
+    return result;
+  }
+
+  preorder(callback) {
+    const result = [];
+
+    function traverse(node) {
+      if (node) {
+        result.push(node.data);
+        callback(node);
+        traverse(node.leftChild);
+        traverse(node.rightChild);
+      }
+    }
+    traverse(this.root);
+    return result;
+  }
+
+  postorder(callback) {
+    const result = [];
+
+    function traverse(node) {
+      if (node) {
+        traverse(node.leftChild);
+        traverse(node.rightChild);
+        result.push(node.data);
+        callback(node);
+      }
+    }
+
+    traverse(this.root);
+    return result;
   }
 }
