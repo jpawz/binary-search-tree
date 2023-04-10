@@ -35,6 +35,38 @@ export class Tree {
   }
 
   delete(value) {
-    
+    this.root = this.deleteNode(this.root, value);
+  }
+
+  deleteNode(node, value) {
+    if (node === null) {
+      return node;
+    }
+
+    if (value < node.data) {
+      node.leftChild = this.deleteNode(node.leftChild, value);
+    } else if (value > node.data) {
+      node.rightChild = this.deleteNode(node.rightChild, value);
+    } else {
+      if (node.leftChild === null) {
+        return node.rightChild;
+      } else if (node.rightChild === null) {
+        return node.leftChild;
+      } else {
+        node.data = this.minValue(node.rightChild);
+        node.rightChild = this.deleteNode(node.rightChild, value);
+      }
+    }
+
+    return node;
+  }
+
+  minValue(node) {
+    let minv = node.data;
+    while (node.leftChild !== null) {
+      minv = node.leftChild.data;
+      node = node.leftChild;
+    }
+    return minv;
   }
 }
