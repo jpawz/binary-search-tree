@@ -87,4 +87,26 @@ export class Tree {
       return this.findNode(node.rightChild, value);
     }
   }
+
+  levelOrder(callback) {
+    if(!this.root) {
+        return;
+    }
+
+    const queue = [];
+    queue.push(this.root);
+
+    while (queue.length > 0) {
+      const node = queue.shift();
+      
+      callback(node);
+
+      if (node.leftChild !== null) {
+        queue.push(node.leftChild);
+      }
+      if (node.rightChild !== null) {
+        queue.push(node.rightChild);
+      }
+    }
+  }
 }
