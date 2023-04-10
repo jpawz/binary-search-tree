@@ -15,4 +15,26 @@ export class Tree {
 
     return rootNode;
   }
+
+  insert(value) {
+    this.root = this.insertNode(this.root, value);
+  }
+
+  insertNode(node, value) {
+    if (!node) {
+      return new Node(value, null, null);
+    }
+
+    if (value > node.data) {
+      node.rightChild = insertNode(node.rightChild, value);
+    } else if (value < node.data) {
+      node.leftChild = insertNode(node.leftChild, value);
+    }
+
+    return node;
+  }
+
+  delete(value) {
+    
+  }
 }
