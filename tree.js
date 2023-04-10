@@ -69,4 +69,22 @@ export class Tree {
     }
     return minv;
   }
+
+  find(value) {
+    return this.findNode(this.root, value);
+  }
+
+  findNode(node, value) {
+    if (!node) {
+      return null;
+    }
+
+    if (value === node.data) {
+      return node;
+    } else if (value < node.data) {
+      return this.findNode(node.leftChild, value);
+    } else {
+      return this.findNode(node.rightChild, value);
+    }
+  }
 }
