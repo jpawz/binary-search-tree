@@ -156,4 +156,13 @@ export class Tree {
     traverse(this.root);
     return result;
   }
+
+  height(node) {
+    if (!node) {
+      return 0;
+    }
+    const leftHeight = this.height(node.leftChild);
+    const rightHeight = this.height(node.rightChild);
+    return Math.max(leftHeight, rightHeight);
+  }
 }
