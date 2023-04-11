@@ -191,4 +191,39 @@ export class Tree {
 
     return -1;
   }
+
+  isBalanced(node) {
+    if (!node) {
+      return true;
+    }
+
+    const leftHeight = this.height(node.leftChild);
+    const rightHeight = this.height(node.rightChild);
+
+    if (
+      Math.abs(leftHeight - rightHeight) <= 1 &&
+      this.isBalanced(node.leftChild) &&
+      this.isBalanced(node.rightChild)
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+
+  rebalance(root) {
+    const nodes = [];
+
+    function traverse(node) {
+      if (node) {
+        traverse(node.leftChild);
+        nodes.push(node.data);
+        traverse(node.rightChild);
+      }
+    }
+
+    traverse(root);
+
+    this.root = this.buildTree(nodes);
+  }
 }
