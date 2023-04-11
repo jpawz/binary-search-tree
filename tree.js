@@ -1,17 +1,20 @@
-import { Node } from "./node";
+const Node = require("./node");
 
-export class Tree {
+class Tree {
   constructor(arr) {
     this.root = this.buildTree(arr);
   }
 
   buildTree(arr) {
+    if (arr.length === 0) {
+      return null;
+    }
     const values = [...new Set(arr)].sort();
     const middleIndex = Math.floor(values.length / 2);
-    const rootNode = new Node(arr[middleIndex], null, null);
+    const rootNode = new Node(values[middleIndex], null, null);
 
-    rootNode.leftChild = this.buildTree(arr.slice(0, middleIndex));
-    rootNode.rightChild = this.buildTree(arr.slice(middleIndex + 1));
+    rootNode.leftChild = this.buildTree(values.slice(0, middleIndex));
+    rootNode.rightChild = this.buildTree(values.slice(middleIndex + 1));
 
     return rootNode;
   }
@@ -227,3 +230,5 @@ export class Tree {
     this.root = this.buildTree(nodes);
   }
 }
+
+module.exports = Tree;
