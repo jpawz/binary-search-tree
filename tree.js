@@ -163,6 +163,10 @@ export class Tree {
     }
     const leftHeight = this.height(node.leftChild);
     const rightHeight = this.height(node.rightChild);
-    return Math.max(leftHeight, rightHeight);
+    return 1 +  Math.max(leftHeight, rightHeight);
+  }
+
+  depth(node) {
+
   }
 }
