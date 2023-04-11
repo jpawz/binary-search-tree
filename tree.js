@@ -163,10 +163,32 @@ export class Tree {
     }
     const leftHeight = this.height(node.leftChild);
     const rightHeight = this.height(node.rightChild);
-    return 1 +  Math.max(leftHeight, rightHeight);
+    return 1 + Math.max(leftHeight, rightHeight);
   }
 
   depth(node) {
+    return this.depthOfNode(this.root, node);
+  }
 
+  depthOfNode(root, node) {
+    if (!root) {
+      return -1;
+    }
+
+    if (root.data === node.data) {
+      return 0;
+    }
+
+    const leftDepth = this.depthOfNode(root.leftChild, node);
+    if (leftDepth !== -1) {
+      return leftDepth + 1;
+    }
+
+    const rightDepth = this.depthOfNode(root.rightChild, node);
+    if (rightDepth !== -1) {
+      return rightDepth + 1;
+    }
+
+    return -1;
   }
 }
